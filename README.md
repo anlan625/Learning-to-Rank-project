@@ -14,3 +14,5 @@ SVMRank-prediction1.txt: the prediction of set1.test by SVMRank-model1
 SVMRank-model2: the model trained by set2.train by SVMRank
 
 SVMRank-prediction2.txt: the prediction of set2.test by SVMRank-model2
+
+Matric.ipynb: the python code use to compute nDCG for predictions
