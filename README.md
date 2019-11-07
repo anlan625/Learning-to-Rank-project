@@ -15,4 +15,18 @@ SVMRank-model2: the model trained by set2.train by SVMRank
 
 SVMRank-prediction2.txt: the prediction of set2.test by SVMRank-model2
 
+RankNet-set1.model: the model trained by set1.train by RankNet
+
+RankNet-prediction1.txt: the prediction of set1.test by RankNet-set1.model
+
+RankNet-set2.model: the model trained by set2.train by RankNet
+
+RankNet-prediction2.txt: the prediction of set2.test by RankNet-set2.model
+
+learning2rank: ranking implementation
+refernece: https://github.com/shiba24/learning2rank
+
 Matric.ipynb: the python code use to compute nDCG for predictions
+
+RankNet_main.py: the python code use to train RankNet and compute nDCG for predictions
+
