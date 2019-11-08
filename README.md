@@ -7,6 +7,9 @@ In the project, we test the nDCG of the model on Yahoo Dataset.
 
 The files are specified as follow:
 
+SVMRank/code: SVMRank implementation
+reference: http://www.cs.cornell.edu/people/tj/svm_light/svm_rank.html
+
 SVMRank-model1: the model trained by set1.train by SVMRank
 
 SVMRank-prediction1.txt: the prediction of set1.test by SVMRank-model1
@@ -26,7 +29,7 @@ RankNet-prediction2.txt: the prediction of set2.test by RankNet-set2.model
 learning2rank: ranking implementation
 refernece: https://github.com/shiba24/learning2rank
 
-Matric.ipynb: the python code use to compute nDCG for predictions
+nDCG.ipynb: the python code use to compute nDCG for predictions
 
 RankNet_main.py: the python code use to train RankNet and compute nDCG for predictions
 
