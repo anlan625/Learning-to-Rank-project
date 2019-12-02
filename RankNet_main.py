@@ -139,10 +139,16 @@ while True:
         break
 f.close()
 
-# Training
+# Training set1
+Model = RankNet.RankNet()
+Model.fit(train_X, train_y)
+pred = Model.predict(test_X)
+np.savetxt('RankNet-prediction1.txt', pred, delimiter=',')
+print(Model.ndcg(test_y, pred))
+
+# Training set2
 Model = RankNet.RankNet()
 Model.fit(train_X, train_y)
 pred = Model.predict(test_X)
 np.savetxt('RankNet-prediction2.txt', pred, delimiter=',')
 print(Model.ndcg(test_y, pred))
-
