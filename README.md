@@ -16,12 +16,12 @@ RankNet-set2.model: the model trained by set2.train by RankNet<br/>
 RankNet-prediction1.txt: the prediction of set1.test by RankNet-set1.model<br/>
 RankNet-prediction2.txt: the prediction of set2.test by RankNet-set2.model<br/>
 
-**Running Code**:  
-nDCG.ipynb: the python code used to compute nDCG for predictions. 
-RankNet_main.py: the python code used to train RankNet and compute nDCG for predictions. 
-metadata.py: the python code used to generate meta data for stack model. 
-stack.py: the python code used to read in meta data of SVMRank and RankNet and train stacked model. 
+**Running Code**:<br/>
+nDCG.ipynb: the python code used to compute nDCG for predictions<br/>
+RankNet_main.py: the python code used to train RankNet and compute nDCG for predictions<br/>
+metadata.py: the python code used to generate meta data for stack model<br/>
+stack.py: the python code used to read in meta data of SVMRank and RankNet and train stacked model<br/>
 
-**Reference**:  
-SVMRank/code: SVMRank implementation Reference: http://www.cs.cornell.edu/people/tj/svm_light/svm_rank.html.  
-learning2rank: ranking implementation Refernece: https://github.com/shiba24/learning2rank. 
+**Reference**:<br/>
+SVMRank/code: SVMRank implementation Reference: http://www.cs.cornell.edu/people/tj/svm_light/svm_rank.html<br/>
+learning2rank: ranking implementation Refernece: https://github.com/shiba24/learning2rank<br/>
