@@ -6,15 +6,15 @@ It is widely recognized that the position of an item in the ranking has a crucia
 The files are specified as follow:
 
 **Output**:  
-Prediction and saved models are in the folder SVMRank and RankNet:  
-SVMRank-model1: the model trained by set1.train by SVMRank. 
-SVMRank-model2: the model trained by set2.train by SVMRank. 
-SVMRank-prediction1.txt: the prediction of set1.test by SVMRank-model1. 
-SVMRank-prediction2.txt: the prediction of set2.test by SVMRank-model2. 
-RankNet-set1.model: the model trained by set1.train by RankNet. 
-RankNet-set2.model: the model trained by set2.train by RankNet. 
-RankNet-prediction1.txt: the prediction of set1.test by RankNet-set1.model. 
-RankNet-prediction2.txt: the prediction of set2.test by RankNet-set2.model. 
+Prediction and saved models are in the folder SVMRank and RankNet:<br/>
+SVMRank-model1: the model trained by set1.train by SVMRank<br/>
+SVMRank-model2: the model trained by set2.train by SVMRank<br/>
+SVMRank-prediction1.txt: the prediction of set1.test by SVMRank-model1<br/>
+SVMRank-prediction2.txt: the prediction of set2.test by SVMRank-model2<br/>
+RankNet-set1.model: the model trained by set1.train by RankNet<br/>
+RankNet-set2.model: the model trained by set2.train by RankNet<br/>
+RankNet-prediction1.txt: the prediction of set1.test by RankNet-set1.model<br/>
+RankNet-prediction2.txt: the prediction of set2.test by RankNet-set2.model<br/>
 
 **Running Code**:  
 nDCG.ipynb: the python code used to compute nDCG for predictions. 
