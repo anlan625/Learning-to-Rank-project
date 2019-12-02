@@ -21,6 +21,7 @@ nDCG.ipynb: the python code used to compute nDCG for predictions<br/>
 RankNet_main.py: the python code used to train RankNet and compute nDCG for predictions<br/>
 metadata.py: the python code used to generate meta data for stack model<br/>
 stack.py: the python code used to read in meta data of SVMRank and RankNet and train stacked model<br/>
+<br/>
 
 **Reference**:<br/>
 SVMRank/code: SVMRank implementation Reference: http://www.cs.cornell.edu/people/tj/svm_light/svm_rank.html<br/>
