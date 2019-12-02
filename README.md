@@ -5,11 +5,11 @@ It is widely recognized that the position of an item in the ranking has a crucia
 
 The files are specified as follow:
 
-**Data**: 
+**Data**:<br/>
 Use the link to download the file to data folder<br/>
 Files would be set1.test.txt, set1.train.txt, set1.valid.txt, set2.test.txt, set2.train.txt, set2.valid.txt
 
-**Output**:  
+**Output**:<br/>
 Prediction and saved models are in the folder SVMRank and RankNet:<br/>
 SVMRank-model1: the model trained by set1.train by SVMRank<br/>
 SVMRank-model2: the model trained by set2.train by SVMRank<br/>
