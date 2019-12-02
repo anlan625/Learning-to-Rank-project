@@ -24,8 +24,6 @@ class Model(chainer.Chain):
     RankNet - Pairwise comparison of ranking.
     The original paper:
         http://research.microsoft.com/en-us/um/people/cburges/papers/ICML_ranking.pdf
-    Japanese only:
-        http://qiita.com/sz_dr/items/0e50120318527a928407
     """
     def __init__(self, n_in, n_units1, n_units2, n_out):
         super(Model, self).__init__(
@@ -91,8 +89,7 @@ class RankNet(NNfuncs.NN):
 
     # Training function
     def trainModel(self, x_train, y_train, x_test, y_test, n_iter):
-        sigma = 5.0
-        loss_step = 100
+        loss_step = 1000
 
         for step in tqdm(range(n_iter)):
             i, j = np.random.randint(len(x_train), size=2)
@@ -113,7 +110,7 @@ class RankNet(NNfuncs.NN):
                     print("step: {0}".format(step + 1))
                     print("NDCG@10 | train: {0}, test: {1}".format(train_ndcg, test_ndcg))
 
-    def fit(self, fit_X, fit_y, batchsize=100, n_iter=5000, n_units1=512, n_units2=128, tv_ratio=0.95, optimizerAlgorithm="Adam", savefigName="result.pdf", savemodelName="RankNet.model"):
+    def fit(self, fit_X, fit_y, batchsize=100, n_iter=10000, n_units1=512, n_units2=128, tv_ratio=0.95, optimizerAlgorithm="Adam", savefigName="result.pdf", savemodelName="RankNet.model"):
         train_X, train_y, validate_X, validate_y = self.splitData(fit_X, fit_y, tv_ratio)
         print("The number of data, train:", len(train_X), "validate:", len(validate_X))
 
@@ -124,115 +121,3 @@ class RankNet(NNfuncs.NN):
 
         plot_result.acc(self.train_loss, self.test_loss, savename=savefigName)
         self.saveModels(savemodelName)
-
-
-
-################################################################################################
-## end of file ##
-################################################################################################
-
-
-##################
-## MEMO
-#
-# # loss func of ranknet
-# def ndcg(y_true, y_score, k=100):
-#     y_true = y_true.ravel()
-#     y_score = y_score.ravel()
-#     y_true_sorted = sorted(y_true, reverse=True)
-#     ideal_dcg = 0
-#     for i in range(k):
-#         ideal_dcg += (2 ** y_true_sorted[i] - 1.) / np.log2(i + 2)
-#     dcg = 0
-#     argsort_indices = np.argsort(y_score)[::-1]
-#     for i in range(k):
-#         dcg += (2 ** y_true[argsort_indices[i]] - 1.) / np.log2(i + 2)
-#     ndcg = dcg / ideal_dcg
-#     return ndcg
-
-# ######################################################################################
-# # training func of ranknet
-# def trainRankNet(model, optimizer, x_train, y_train, x_test, y_test, n_iter, N_train, N_test):
-#     sigma = 5.0
-#     loss_step = 100
-#     train_ndcgs, test_ndcgs = [], []
-
-#     for step in tqdm(range(n_iter)):
-#         i, j = np.random.randint(N_train, size=2)
-#         x_i = chainer.Variable(x_train[i].reshape(1, -1))
-#         x_j = chainer.Variable(x_train[j].reshape(1, -1))
-#         y_i = chainer.Variable(y_train[i])
-#         y_j = chainer.Variable(y_train[j])
-#         optimizer.update(model, x_i, x_j, y_i, y_j)
-
-#         if (step + 1) % loss_step == 0:
-#             train_score = model.predict(chainer.Variable(x_train))
-#             test_score = model.predict(chainer.Variable(x_test))
-#             train_ndcg = ndcg(y_train, train_score)
-#             test_ndcg = ndcg(y_test, test_score)
-#             train_ndcgs.append(train_ndcg)
-#             test_ndcgs.append(test_ndcg)
-#             print("step: {0}".format(step + 1))
-#             print("NDCG@100 | train: {0}, test: {1}".format(train_ndcg, test_ndcg))
-#     return model, optimizer, train_ndcg, test_ndcg
-
-
-# ################################################################################################
-# ## 学習部分 ##
-# ################################################################################################
-
-# # n_iter は、多分めちゃめちゃ多い方がよいと思う。イメージ、データ数くらい？
-
-# def fit(fit_X, fit_y, batchsize=100, n_iter=5000, n_units1=512, n_units2=128, tv_ratio=0.95, optimizerAlgorithm="Adam", savefigName="result.png", savemodelName="Spearman.model", resumemodelName=None):
-#     print('load dataset')
-#     perm = np.random.permutation(len(fit_X))
-
-#     N_train = np.floor(len(fit_X) * tv_ratio)
-#     train_X, validate_X = np.split(fit_X[perm].astype(np.float32),   [N_train])
-#     train_y, validate_y = np.split(fit_Y[perm].astype(np.float32).reshape(len(fit_Y), 1), [N_train])
-#     N_validate = len(validate_y)
-#     print("The number of data, train:",N_train, "validate:", N_validate)                # トレーニングとテストのデータ数を表示
-
-#     if resumemodelName is None:
-#         print("prepare initialized model!")
-#         model = Model(len(x_train[0]), n_units1, n_units2, 1)
-#         if optimizerAlgorithm == "Adam":
-#             optimizer = optimizers.Adam()
-#         elif optimizerAlgorithm == "AdaGrad":
-#             optimizer = optimizers.AdaGrad()
-#         elif optimizerAlgorithm == "SGD":
-#             optimizer = optimizers.MomentumSGD()
-#         else:
-#             raise ValueError('could not find %s in optimizers {"Adam", "AdaGrad", "SGD"}' % (optimizerAlgorithm))
-#         optimizer.setup(model)
-#     else:
-#         print("load resume model!")
-#         model, optimizer =  loadModel(resumemodelName)
-
-#     model, optimizer, train_loss, test_loss = trainRankNet(model, optimizer, train_X, train_y, validate_X, validate_y, n_iter, N_train, N_validate)
-
-# #    plot_result(train_loss, test_loss, savename=savefigName)
-#     print('save the model')
-#     serializers.save_hdf5(savemodelName, model)
-#     print('save the optimizer')
-#     serializers.save_hdf5(savemodelName[:-5]+ 'state', optimizer)
-#     return model
-
-
-# ################################################################################################
-# ## 予測 ##
-# ################################################################################################
-
-# def predict(model, predict_X, batchsize=100):
-#     predict_y = predictTargets(model, predict_X.astype(np.float32), batchsize)
-#     return predict_y
-
-# def loadModel(modelName):
-#     print('Load model')
-#     serializers.load_hdf5(modelName, model)
-#     print('Load optimizer state')
-#     serializers.load_hdf5(modelName[:-5] + 'state', optimizer)
-#     return model, optimizer
-
-
-
