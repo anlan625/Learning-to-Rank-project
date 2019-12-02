@@ -28,13 +28,18 @@ stack.py: the python code used to read in meta data of SVMRank and RankNet and t
 <br/>
 To generate the stacked model, first use metadata.py to get meta data from RankNet. Then use svm_data.py to get the split of folds of data to generate meta data for SVMRank. Change the splitted data file form ".txt" to ".dat". Use the SVM package from cornell with the following code in order:<br/>
 ./svm_rank_learn data/model1_train.dat model1<br/>
-./svm_rank_classify data/subset3.dat model1 rs_test1<br/>
-./svm_rank_learn data/model2_train.dat model2<br/>
-./svm_rank_classify data/subset2.dat model2 rs_test2<br/>
-./svm_rank_learn data/model3_train.dat model3<br/>
-./svm_rank_classify data/subset1.dat model3 rs_test3<br/>
+./svm_rank_classify data/subset3.dat model1 rs_train1<br/>
+./svm_rank_classify data/test.dat model1 rs_test1<br/>
 
-Then use stack.py to train the stacked model.
+./svm_rank_learn data/model2_train.dat model2<br/>
+./svm_rank_classify data/subset2.dat model2 rs_train2<br/>
+./svm_rank_classify data/test.dat model2 rs_test2<br/>
+
+./svm_rank_learn data/model3_train.dat model3<br/>
+./svm_rank_classify data/subset1.dat model3 rs_train3<br/>
+./svm_rank_classify data/test.dat model3 rs_test3<br/>
+
+Here we manually take the average of all rs_test to get meta-Y with name rs_meta_test_x.txt and combine all rs_train to rn_meta_train_x.txt. Then use stack.py to train the stacked model.
 
 **Reference**:<br/>
 SVMRank/code: SVMRank implementation Reference: http://www.cs.cornell.edu/people/tj/svm_light/svm_rank.html<br/>
